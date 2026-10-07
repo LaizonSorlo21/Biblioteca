@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Biblioteca.Negocio</RootNamespace>
+    <AssemblyName>Biblioteca.Negocio</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Biblioteca.Datos\Biblioteca.Datos.csproj" />
+    <ProjectReference Include="..\Biblioteca.Entidades\Biblioteca.Entidades.csproj" />
+  </ItemGroup>
+</Project>

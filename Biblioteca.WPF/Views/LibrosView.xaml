@@ -1,0 +1,53 @@
+<UserControl x:Class="Biblioteca.WPF.Views.LibrosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.ColumnSpan="2" Text="Libros" Style="{StaticResource Titulo}" />
+
+        <DockPanel Grid.Row="1" Margin="0,0,16,0">
+            <DockPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+                <Button DockPanel.Dock="Right" Content="Buscar" Margin="6,0,0,0" Click="Buscar_Click" IsDefault="True" />
+                <TextBox x:Name="txtBuscar" Margin="0" ToolTip="Buscar por título o autor" />
+            </DockPanel>
+            <DataGrid x:Name="dgLibros" SelectionChanged="dgLibros_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding LibroId}" Width="45" />
+                    <DataGridTextColumn Header="Título" Binding="{Binding Titulo}" Width="*" />
+                    <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}" Width="115" />
+                    <DataGridTextColumn Header="Autor" Binding="{Binding NombreAutor}" Width="150" />
+                    <DataGridTextColumn Header="Ejemplares" Binding="{Binding Ejemplares}" Width="80" />
+                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="70" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="ID" />
+            <TextBox x:Name="txtId" IsReadOnly="True" Background="#EEE" />
+            <TextBlock Text="Título" />
+            <TextBox x:Name="txtTitulo" MaxLength="200" />
+            <TextBlock Text="ISBN" />
+            <TextBox x:Name="txtIsbn" MaxLength="20" />
+            <TextBlock Text="Autor" />
+            <ComboBox x:Name="cmbAutor" DisplayMemberPath="Nombre" SelectedValuePath="AutorId" Margin="0,0,0,8" />
+            <TextBlock Text="Ejemplares" />
+            <TextBox x:Name="txtEjemplares" />
+            <WrapPanel Margin="0,8,0,0">
+                <Button Content="Nuevo" Click="Nuevo_Click" />
+                <Button Content="Guardar" Click="Guardar_Click" />
+                <Button Content="Actualizar" Click="Actualizar_Click" />
+                <Button Content="Eliminar" Click="Eliminar_Click" />
+                <Button Content="Limpiar" Click="Limpiar_Click" />
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

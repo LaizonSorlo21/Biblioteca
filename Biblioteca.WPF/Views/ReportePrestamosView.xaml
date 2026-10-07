@@ -1,0 +1,35 @@
+<UserControl x:Class="Biblioteca.WPF.Views.ReportePrestamosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Reporte de préstamos" Style="{StaticResource Titulo}" />
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <StackPanel Margin="0,0,16,0">
+                <TextBlock Text="Fecha desde" />
+                <DatePicker x:Name="dpDesde" Width="150" />
+            </StackPanel>
+            <StackPanel Margin="0,0,16,0">
+                <TextBlock Text="Fecha hasta" />
+                <DatePicker x:Name="dpHasta" Width="150" />
+            </StackPanel>
+            <Button Content="Buscar" VerticalAlignment="Bottom" Click="Buscar_Click" />
+        </StackPanel>
+
+        <DataGrid Grid.Row="2" x:Name="dgReporte">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Socio" Binding="{Binding NombreSocio}" Width="*" />
+                <DataGridTextColumn Header="Libro" Binding="{Binding TituloLibro}" Width="*" />
+                <DataGridTextColumn Header="Fecha de préstamo" Binding="{Binding FechaPrestamo, StringFormat=dd/MM/yyyy}" Width="120" />
+                <DataGridTextColumn Header="Fecha límite" Binding="{Binding FechaLimite, StringFormat=dd/MM/yyyy}" Width="100" />
+                <DataGridTextColumn Header="Estado" Binding="{Binding EstadoPrestamo}" Width="80" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

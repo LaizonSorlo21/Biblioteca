@@ -1,0 +1,18 @@
+<Window x:Class="Biblioteca.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Biblioteca" Height="620" Width="1020" MinHeight="520" MinWidth="860"
+        WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left" Width="180" Background="{StaticResource ColorPrimario}">
+            <TextBlock Text="Biblioteca" Foreground="White" FontSize="22" FontWeight="Bold" Margin="16,20,16,20" />
+            <Button Content="Inicio" Tag="Inicio" Style="{StaticResource BotonNavegacion}" Click="Navegar_Click" />
+            <Button Content="Libros" Tag="Libros" Style="{StaticResource BotonNavegacion}" Click="Navegar_Click" />
+            <Button Content="Socios" Tag="Socios" Style="{StaticResource BotonNavegacion}" Click="Navegar_Click" />
+            <Button Content="Préstamos" Tag="Prestamos" Style="{StaticResource BotonNavegacion}" Click="Navegar_Click" />
+            <Button Content="Devoluciones" Tag="Devoluciones" Style="{StaticResource BotonNavegacion}" Click="Navegar_Click" />
+            <Button Content="Reporte" Tag="Reporte" Style="{StaticResource BotonNavegacion}" Click="Navegar_Click" />
+        </StackPanel>
+        <ContentControl x:Name="contenido" Margin="16" />
+    </DockPanel>
+</Window>

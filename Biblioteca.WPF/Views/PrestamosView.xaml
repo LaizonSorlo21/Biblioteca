@@ -1,0 +1,70 @@
+<UserControl x:Class="Biblioteca.WPF.Views.PrestamosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.ColumnSpan="3" Text="Registrar préstamo" Style="{StaticResource Titulo}" />
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0,0,8">
+            <TextBlock Text="Socio" />
+            <ComboBox x:Name="cmbSocio" Width="420" HorizontalAlignment="Left" SelectedValuePath="SocioId">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding Nombre, Mode=OneWay}" /><Run Text=" - DNI " /><Run Text="{Binding DNI, Mode=OneWay}" />
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+
+        <DockPanel Grid.Row="2">
+            <TextBlock DockPanel.Dock="Top" Text="Libros activos (seleccione uno o varios)" Margin="0,0,0,4" />
+            <DataGrid x:Name="dgLibros" SelectionMode="Extended">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Título" Binding="{Binding Titulo}" Width="*" />
+                    <DataGridTextColumn Header="Autor" Binding="{Binding NombreAutor}" Width="130" />
+                    <DataGridTextColumn Header="Disp." Binding="{Binding Ejemplares}" Width="50" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
+            <Button Content="Agregar &gt;&gt;" Click="Agregar_Click" />
+            <Button Content="&lt;&lt; Quitar" Click="Quitar_Click" />
+        </StackPanel>
+
+        <DockPanel Grid.Row="2" Grid.Column="2">
+            <TextBlock DockPanel.Dock="Top" Text="Libros del préstamo" Margin="0,0,0,4" />
+            <DataGrid x:Name="dgSeleccion" SelectionMode="Extended">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Título" Binding="{Binding Titulo}" Width="*" />
+                    <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}" Width="115" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,12,0,0">
+            <StackPanel Margin="0,0,16,0">
+                <TextBlock Text="Fecha de préstamo" />
+                <DatePicker x:Name="dpFechaPrestamo" IsEnabled="False" Width="150" />
+            </StackPanel>
+            <StackPanel Margin="0,0,16,0">
+                <TextBlock Text="Fecha límite" />
+                <DatePicker x:Name="dpFechaLimite" Width="150" />
+            </StackPanel>
+            <Button Content="Registrar préstamo" VerticalAlignment="Bottom" Click="Registrar_Click" />
+        </StackPanel>
+    </Grid>
+</UserControl>

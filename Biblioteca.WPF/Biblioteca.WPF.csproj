@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>Biblioteca.WPF</RootNamespace>
+    <AssemblyName>Biblioteca.WPF</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Biblioteca.Negocio\Biblioteca.Negocio.csproj" />
+    <ProjectReference Include="..\Biblioteca.Entidades\Biblioteca.Entidades.csproj" />
+  </ItemGroup>
+</Project>

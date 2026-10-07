@@ -1,0 +1,50 @@
+<UserControl x:Class="Biblioteca.WPF.Views.SociosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="280" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.ColumnSpan="2" Text="Socios" Style="{StaticResource Titulo}" />
+
+        <DockPanel Grid.Row="1" Margin="0,0,16,0">
+            <DockPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+                <Button DockPanel.Dock="Right" Content="Buscar" Margin="6,0,0,0" Click="Buscar_Click" IsDefault="True" />
+                <TextBox x:Name="txtBuscar" Margin="0" ToolTip="Buscar por nombre o DNI" />
+            </DockPanel>
+            <DataGrid x:Name="dgSocios" SelectionChanged="dgSocios_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding SocioId}" Width="45" />
+                    <DataGridTextColumn Header="DNI" Binding="{Binding DNI}" Width="85" />
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="170" />
+                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="70" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="ID" />
+            <TextBox x:Name="txtId" IsReadOnly="True" Background="#EEE" />
+            <TextBlock Text="DNI" />
+            <TextBox x:Name="txtDni" MaxLength="8" />
+            <TextBlock Text="Nombre" />
+            <TextBox x:Name="txtNombre" MaxLength="100" />
+            <TextBlock Text="Email" />
+            <TextBox x:Name="txtEmail" MaxLength="150" />
+            <WrapPanel Margin="0,8,0,0">
+                <Button Content="Nuevo" Click="Nuevo_Click" />
+                <Button Content="Guardar" Click="Guardar_Click" />
+                <Button Content="Actualizar" Click="Actualizar_Click" />
+                <Button Content="Eliminar" Click="Eliminar_Click" />
+                <Button Content="Limpiar" Click="Limpiar_Click" />
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
