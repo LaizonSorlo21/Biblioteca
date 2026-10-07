@@ -19,9 +19,9 @@ namespace Biblioteca.Negocio
             _autores = autores;
         }
 
-        public Task<List<Libro>> ListarAsync(string filtro) { return _libros.ListarAsync(filtro); }
-        public Task<List<Libro>> ListarActivosAsync() { return _libros.ListarActivosAsync(); }
-        public Task<List<Autor>> ListarAutoresAsync() { return _autores.ListarActivosAsync(); }
+        public Task<List<Libro>> ListarAsync(string filtro) => _libros.ListarAsync(filtro);
+        public Task<List<Libro>> ListarActivosAsync() => _libros.ListarActivosAsync();
+        public Task<List<Autor>> ListarAutoresAsync() => _autores.ListarActivosAsync();
 
         public async Task<int> InsertarAsync(Libro libro)
         {
@@ -45,7 +45,6 @@ namespace Biblioteca.Negocio
             await _libros.ActualizarAsync(libro).ConfigureAwait(false);
         }
 
-        /// <summary>Baja lógica (Activo = 0). Nunca elimina físicamente.</summary>
         public async Task DarDeBajaAsync(int libroId)
         {
             Libro libro = await _libros.ObtenerAsync(libroId).ConfigureAwait(false);
@@ -67,19 +66,18 @@ namespace Biblioteca.Negocio
             libro.Titulo = (libro.Titulo ?? string.Empty).Trim();
             libro.ISBN = (libro.ISBN ?? string.Empty).Trim();
 
-            if (libro.Titulo.Length == 0)
+            if (string.IsNullOrEmpty(libro.Titulo))
                 throw new ReglaNegocioException("Ingrese el título del libro.");
-            if (libro.ISBN.Length == 0)
+            if (string.IsNullOrEmpty(libro.ISBN))
                 throw new ReglaNegocioException("Ingrese el ISBN del libro.");
             if (libro.Ejemplares < 0)
                 throw new ReglaNegocioException("La cantidad de ejemplares no puede ser negativa.");
 
-            List<Autor> autores = await _autores.ListarActivosAsync().ConfigureAwait(false);
-            if (libro.AutorId <= 0 || !autores.Any(a => a.AutorId == libro.AutorId))
+            if (libro.AutorId <= 0 || !await _autores.ExisteActivoAsync(libro.AutorId).ConfigureAwait(false))
                 throw new ReglaNegocioException("Seleccione un autor válido.");
 
             if (await _libros.ExisteIsbnAsync(libro.ISBN, excluirLibroId).ConfigureAwait(false))
-                throw new ReglaNegocioException("Ya existe un libro con el ISBN " + libro.ISBN + ".");
+                throw new ReglaNegocioException($"Ya existe un libro con el ISBN {libro.ISBN}.");
         }
     }
 }
