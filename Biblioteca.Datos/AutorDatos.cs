@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Biblioteca.Entidades;
@@ -39,6 +40,19 @@ namespace Biblioteca.Datos
                 }
 
                 return lista;
+            });
+        }
+
+        public Task<bool> ExisteActivoAsync(int autorId)
+        {
+            return Conexion.EjecutarAsync(async cn =>
+            {
+                const string sql = "SELECT COUNT(1) FROM Autores WHERE AutorId = @AutorId AND Activo = 1";
+                using (var cmd = new SqlCommand(sql, cn))
+                {
+                    cmd.Parameters.Add("@AutorId", SqlDbType.Int).Value = autorId;
+                    return (int)await cmd.ExecuteScalarAsync().ConfigureAwait(false) > 0;
+                }
             });
         }
     }
